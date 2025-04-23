@@ -7,7 +7,7 @@ import { Type } from "./models/type.model";
 @Injectable()
 export class TypesService {
   constructor(@InjectModel(Type) private typeModel: typeof Type) {}
-  async create(createTypeDto: CreateTypeDto): Promise<Type> {
+  create(createTypeDto: CreateTypeDto): Promise<Type> {
     return this.typeModel.create(createTypeDto);
   }
 

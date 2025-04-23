@@ -9,7 +9,7 @@ import {
 } from "sequelize-typescript";
 import { BlockProperty } from "src/block_properties/models/block_property.model";
 import { Property } from "src/properties/models/property.model";
-import { Type } from "src/typess/models/type.model";
+import { Type } from "src/types/models/type.model";
 
 interface IBlocksCreationAttr {
   typeId: number;
@@ -47,6 +47,6 @@ export class Block extends Model<Block, IBlocksCreationAttr> {
   @BelongsTo(() => Type)
   type: Type;
 
-  @BelongsToMany(() =>Property, ()=>BlockProperty)
-  property: Property[]
+  @BelongsToMany(() => Property, () => BlockProperty)
+  property: Property[];
 }
