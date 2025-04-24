@@ -1,9 +1,21 @@
+import { IsEmail, IsEmpty, IsString } from "class-validator";
+
 export class CreateUserDto {
-    first_name: string;
-    last_name: string;
-    email: string;
-    hashed_psaaword: string;
-    photo: string;
-    refresh_token: string;
-    activation_link: string
+  @IsString()
+  first_name: string;
+  @IsString()
+  last_name: string;
+  @IsEmail()
+  email: string;
+  @IsStrongPassword({
+    minLength: 6,
+    minUppercase: 0,
+    minSymbols: 0,
+    minNumbers: 0,
+  })
+  hashed_psaaword: string;
+  @IsString()
+  photo: string;
+  refresh_token: string;
+  activation_link: string;
 }
