@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../guards/jwtauth.guard';
+import { JwtSelfUserGuard } from '../guards/jwtselfuser.guard';
 
 @ApiTags("User-Foydalanuchi")
 @Controller("user")
@@ -15,12 +17,15 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Barcha foydalanuvchilarni olish" })
   @Get()
   findAll() {
     return this.userService.findAll();
   }
 
+  @UseGuards(JwtSelfUserGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Foydalanuvchini olish" })
   @Get(":id")
   findOne(@Param("id") id: string) {
