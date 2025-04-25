@@ -7,9 +7,10 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { BlockProperty } from "src/block_properties/models/block_property.model";
-import { Property } from "src/properties/models/property.model";
-import { Type } from "src/types/models/type.model";
+import { BlockProperty } from "../../block_properties/models/block_property.model";
+import { Property } from "../../properties/models/property.model";
+import { Type } from "../../types/models/type.model";
+import { User } from "../../user/models/user.model";
 
 interface IBlocksCreationAttr {
   typeId: number;

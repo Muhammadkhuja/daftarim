@@ -1,10 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../guards/jwtauth.guard';
-import { JwtSelfUserGuard } from '../guards/jwtselfuser.guard';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  UseInterceptors,
+  UploadedFile,
+} from "@nestjs/common";
+import { UserService } from "./user.service";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { JwtAuthGuard } from "../guards/jwtauth.guard";
+import { JwtSelfUserGuard } from "../guards/jwtselfuser.guard";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { User } from "./models/user.model";
 
 @ApiTags("User-Foydalanuchi")
 @Controller("user")
@@ -13,8 +26,12 @@ export class UserController {
 
   @ApiOperation({ summary: "Foydalanuvchi qo'shish" })
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @UseInterceptors(FileInterceptor("photo"))
+  create(
+    @Body() createUserDto: CreateUserDto,
+    @UploadedFile() photo: any
+  ): Promise<User> {
+    return this.userService.create(createUserDto, photo);
   }
 
   @UseGuards(JwtAuthGuard)

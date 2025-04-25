@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Role } from "../../roles/models/role.model";
 
 interface IAdminCreationAttr {
   full_name: string;
@@ -25,6 +26,8 @@ export class Admin extends Model<Admin, IAdminCreationAttr> {
   @Column({ type: DataType.STRING })
   refresh_token: string;
 
+
+  @ForeignKey(() => Role)
   @Column({ type: DataType.INTEGER })
   roleId: number;
 

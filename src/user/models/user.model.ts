@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
+import { Device } from "../../devices/models/device.model";
 
 interface IUserCreationAttr {
   first_name: string;
@@ -16,23 +17,24 @@ export class User extends Model<User, IUserCreationAttr> {
   declare id: number;
 
   @Column({ type: DataType.STRING })
-  first_name: string;
+  declare first_name: string;
 
   @Column({ type: DataType.STRING })
-  last_name: string;
+  declare last_name: string;
 
   @Column({ type: DataType.STRING })
-  email: string;
+  declare email: string;
 
   @Column({ type: DataType.STRING })
-  hashed_psaaword: string;
+  declare hashed_psaaword: string;
 
   @Column({ type: DataType.STRING })
-  photo: string;
+  declare photo: string;
 
-  @Column({ type: DataType.STRING, allowNull:true})
-  refresh_token: string;
+  @Column({ type: DataType.STRING, allowNull: true })
+  declare refresh_token: string;
 
-  @Column({ type: DataType.STRING, defaultValue:false })
-  activation_link: string;
+  @Column({ type: DataType.STRING, defaultValue: false })
+  declare activation_link: string;
+
 }

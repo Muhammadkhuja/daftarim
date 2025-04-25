@@ -37,7 +37,6 @@ export class CreateUserDto {
     example: "photo",
     description: "Foydalanuvchining rasmi",
   })
-  @IsString()
   photo: string;
 
   @ApiProperty({

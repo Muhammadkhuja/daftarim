@@ -3,7 +3,7 @@ import { BlocksService } from "./blocks.service";
 import { BlocksController } from "./blocks.controller";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { Block } from "./models/block.model";
-import { TypesModule } from "src/types/types.module";
+import { TypesModule } from "../types/types.module";
 
 @Module({
   imports: [SequelizeModule.forFeature([Block]), TypesModule],

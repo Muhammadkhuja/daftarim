@@ -1,13 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './models/user.model';
+import { Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { InjectModel } from "@nestjs/sequelize";
+import { User } from "./models/user.model";
+import { FileService } from "../file/file.service";
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User) private userModel: typeof User) {}
-  create(createUserDto: CreateUserDto): Promise<User> {
-    return this.userModel.create(createUserDto);
+  constructor(
+    @InjectModel(User) private readonly userModel: typeof User,
+    private readonly fileService: FileService
+  ) {}
+  async create(createUserDto: CreateUserDto, photo?: any): Promise<User> {
+    const fileName = await this.fileService.saveFile(photo);
+    return this.userModel.create({...createUserDto, photo: fileName});
   }
 
   findAll(): Promise<User[]> {
@@ -38,7 +43,7 @@ export class UserService {
   async findbyEmail(email: string) {
     const user = await this.userModel.findOne({
       where: { email },
-      include: {all: true}
+      include: { all: true },
     });
     return user?.dataValues;
   }

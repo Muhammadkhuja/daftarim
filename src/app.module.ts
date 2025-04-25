@@ -14,9 +14,23 @@ import { AdminModule } from "./admin/admin.module";
 import { AuthModule } from "./auth/auth.module";
 import { User } from "./user/models/user.model";
 import { Admin } from "./admin/models/admin.model";
+import { RolesService } from './roles/roles.service';
+import { CommentsService } from './comments/comments.service';
+import { DevicesService } from './devices/devices.service';
+import { GroupsService } from './groups/groups.service';
+import { FileModule } from './file/file.module';
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
+import { RolesModule } from './roles/roles.module';
+import { CommentsModule } from './comments/comments.module';
+import { DevicesModule } from './devices/devices.module';
+import { GroupsModule } from './groups/groups.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "..", "static"),
+    }),
     SequelizeModule.forRoot({
       dialect: "postgres",
       host: process.env.PG_HOST,
@@ -36,8 +50,12 @@ import { Admin } from "./admin/models/admin.model";
     UserModule,
     AdminModule,
     AuthModule,
+    FileModule,
+    RolesModule,
+    CommentsModule,
+    DevicesModule,
+    GroupsModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: []
 })
 export class AppModule {}

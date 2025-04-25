@@ -27,7 +27,7 @@ export class PropertiesService {
       where: {id},
       returning: true
     })
-    return updatePropertyDto[1][0];
+    return updateproperty[1][0];
   }
 
   async remove(id: number) {
