@@ -19,7 +19,7 @@ export class BlockPropertiesController {
   }
 
   @Get()
-  @ApiOperation({ summary: "Blok xusitarni olish" })
+  @ApiOperation({ summary: "Barcha Blok xusitarni olish" })
   findAll() {
     return this.blockPropertiesService.findAll();
   }

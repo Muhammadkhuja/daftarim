@@ -25,6 +25,12 @@ import { RolesModule } from './roles/roles.module';
 import { CommentsModule } from './comments/comments.module';
 import { DevicesModule } from './devices/devices.module';
 import { GroupsModule } from './groups/groups.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { WorkspaceModule } from './workspace/workspace.module';
+import { GroupMembersModule } from './group_members/group_members.module';
+import { WorkspaceMembersModule } from './workspace_members/workspace_members.module';
+import { TeamSpaceModule } from './team_space/team_space.module';
+import { TeamSpaceMembersModule } from './team_space_members/team_space_members.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }),
@@ -55,6 +61,12 @@ import { GroupsModule } from './groups/groups.module';
     CommentsModule,
     DevicesModule,
     GroupsModule,
+    PermissionsModule,
+    WorkspaceModule,
+    GroupMembersModule,
+    WorkspaceMembersModule,
+    TeamSpaceModule,
+    TeamSpaceMembersModule,
   ],
   controllers: []
 })

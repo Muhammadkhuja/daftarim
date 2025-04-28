@@ -1,12 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBlockPropertyDto } from './dto/create-block_property.dto';
-import { UpdateBlockPropertyDto } from './dto/update-block_property.dto';
-import { InjectModel } from '@nestjs/sequelize';
-import { BlockProperty } from './models/block_property.model';
+import { Injectable } from "@nestjs/common";
+import { CreateBlockPropertyDto } from "./dto/create-block_property.dto";
+import { UpdateBlockPropertyDto } from "./dto/update-block_property.dto";
+import { InjectModel } from "@nestjs/sequelize";
+import { BlockProperty } from "./models/block_property.model";
 
 @Injectable()
 export class BlockPropertiesService {
-  constructor(@InjectModel(BlockProperty) private blockpropertyModel: typeof BlockProperty){}
+  constructor(
+    @InjectModel(BlockProperty) private blockpropertyModel: typeof BlockProperty
+  ) {}
 
   create(createBlockPropertyDto: CreateBlockPropertyDto) {
     return this.blockpropertyModel.create(createBlockPropertyDto);
@@ -20,9 +22,14 @@ export class BlockPropertiesService {
     return this.blockpropertyModel.findByPk(id);
   }
 
-  async update(id: number, updateBlockPropertyDto: UpdateBlockPropertyDto): Promise<BlockProperty | null> {
-    const updateBlockProperty = await this.blockpropertyModel.update(updateBlockPropertyDto, {where: {id},
-    returning:true})
+  async update(
+    id: number,
+    updateBlockPropertyDto: UpdateBlockPropertyDto
+  ): Promise<BlockProperty | null> {
+    const updateBlockProperty = await this.blockpropertyModel.update(
+      updateBlockPropertyDto,
+      { where: { id }, returning: true }
+    );
     return updateBlockProperty[1][0];
   }
 
