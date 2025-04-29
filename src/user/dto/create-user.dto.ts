@@ -44,10 +44,4 @@ export class CreateUserDto {
     description: "Refresh to'ken",
   })
   refresh_token: string;
-
-  @ApiProperty({
-    example: "null",
-    description: "Activation link",
-  })
-  activation_link: string;
 }

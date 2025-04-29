@@ -8,7 +8,6 @@ interface IUserCreationAttr {
   hashed_psaaword: string;
   photo: string;
   refresh_token: string;
-  activation_link: string;
 }
 
 @Table({ tableName: "users" })
